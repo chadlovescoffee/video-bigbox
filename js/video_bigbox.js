@@ -44,64 +44,50 @@ hero_video = {
     var destination = video_bigbox_setup.destination;
 
     // Hero Video HTML
-    var hero_html = '<div class="cover" style="background-image:url(' + video_bigbox_setup.cover + ')"></div>';
-    if($(window).width() >= 768) {
+    var video_html = '<div class="cover" style="background-image:url(' + video_bigbox_setup.cover + ')"></div>';
 
-      // Desktop
-      hero_html +=
-        '<div class="clicktag"></div>' +
-        '<div class="controls column_wrapper">' +
-        '   <div class="play_pause">' +
-        '       <div class="icon play hide"></div>' +
-        '       <div class="icon pause"></div>' +
-        '   </div>' +
-        '   <div class="volume">' +
-        '       <div class="icon mute hide"></div>' +
-        '       <div class="icon unmute"></div>' +
+    video_html +=
+      '<div class="clicktag"></div>' +
+      '<div class="controls column_wrapper">' +
+      '   <div class="play_pause">' +
+      '       <div class="icon play hide"></div>' +
+      '       <div class="icon pause"></div>' +
+      '   </div>' +
+      '   <div class="volume">' +
+      '       <div class="icon mute hide"></div>' +
+      '       <div class="icon unmute"></div>' +
 
-        '   </div>' +
-        '</div>';
-    } else {
-
-      // Mobile Version
-      hero_html +=
-        '<div class="mobile">' +
-        '</div>';
-
-    }
+      '   </div>' +
+      '</div>';
 
 
     // Document Ready
     $( document ).ready(function() {
 
-      $(destination).html('<div class="video_bigbox_pkg" style="display: none;">' + hero_html + '</div>');
+      $(destination).html('<div class="video_bigbox_pkg" style="display: none;">' + video_html + '</div>');
 
+      $(destination + ' .video_bigbox_pkg').tubeplayer({
+        width: 300, // the width of the player
+        height: 500, // the height of the player
+        autoPlay: true,
+        loop: 1,
+        allowFullScreen: "true", // true by default, allow user to go full screen
+        initialVideo: video_bigbox_setup.youtube_id, // the video that is loaded into the player
+        preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
+        onPlay: function(id){}, // after the play method is called
+        onPlayerPlaying: function(){
+          mute_first_play();
+          $(destination + ' iframe').addClass('on');
+          $(destination + ' .cover').delay(800).fadeOut();
+        },
+        onPause: function(){}, // after the pause method is called
+        onStop: function(){}, // after the player is stopped
+        onSeek: function(time){}, // after the video has been seeked to a defined point
+        onPlayerCued: function(){},
+        onMute: function(){}, // after the player is muted
+        onUnMute: function(){} // after the player is unmuted
+      });
 
-      if($(window).width() >= 768) {
-
-        $(destination + ' .video_bigbox_pkg').tubeplayer({
-          width: 300, // the width of the player
-          height: 500, // the height of the player
-          autoPlay: true,
-          loop: 1,
-          allowFullScreen: "true", // true by default, allow user to go full screen
-          initialVideo: video_bigbox_setup.youtube_id, // the video that is loaded into the player
-          preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
-          onPlay: function(id){}, // after the play method is called
-          onPlayerPlaying: function(){
-            mute_first_play();
-            $(destination + ' iframe').addClass('on');
-            $(destination + ' .cover').delay(800).fadeOut();
-          },
-          onPause: function(){}, // after the pause method is called
-          onStop: function(){}, // after the player is stopped
-          onSeek: function(time){}, // after the video has been seeked to a defined point
-          onPlayerCued: function(){},
-          onMute: function(){}, // after the player is muted
-          onUnMute: function(){} // after the player is unmuted
-        });
-
-      }
     });
 
 
