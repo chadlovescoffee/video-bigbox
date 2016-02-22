@@ -1,0 +1,26 @@
+<html>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <script src="js/jquery-2.2.0.min.js"></script>
+  </head>
+  <body>
+
+    <div class="bigbox"></div>
+
+    <script>
+      var video_bigbox_setup = {
+        'destination': '.bigbox',
+        'youtube_id': 'dD1Wx_DRuic',
+        'cover': 'images/cover.jpg',
+        'clicktag': 'http://www.smarturl.it/TWFp'
+      };
+
+      $.getScript('js/video_bigbox.min.js', function(){
+        hero_video.app();
+      });
+    </script>
+
+  </body>
+</html>
